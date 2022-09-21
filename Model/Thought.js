@@ -1,6 +1,6 @@
 const { Schema } = require("mongoose");
 var validator = require("validator");
-//Though model sub-document schema)
+//Thought model sub-document schema)
 const ReactionSchema = new Schema({
   replyId: {
     type: Schema.Types.ObjectId,
