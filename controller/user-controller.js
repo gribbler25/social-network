@@ -68,12 +68,35 @@ const userController = {
       .catch((err) => res.status(400).json(err));
   },
 
-  //   addFriend({params},res) {
-  //     User.findOneAndUpdate();
-  //   },
-  //   deleteFriend({params}, res) {
-  //     User.findOneAndUpdate("_id: params.userId");
-  //   },
+  addFriend({ params }, res) {
+    // for "/:userId/friends/friendId" route
+    User.findOneAndUpdate(
+      { _id: params.userId }, //get a user with the id= the param id
+      { $push: { friends: params.friendId } }, //pushes the body of the request(the friend)
+      {
+        new: true,
+        runValidators: true,
+      }
+    )
+      .then((dbFriendData) => res.json(dbFriendData))
+      .catch((err) => {
+        console.log(err);
+        res.status(400).json({ message: "error in your request" });
+      });
+  },
+
+  // deleteFriend({ params }, res) {
+  //   // for "/:userId/friends/friendId" route
+  //   User.findOneAndUpdate(
+  //     { _id: params.userId },
+  //     { $pull: { friends: params.friendId } }
+  //   )
+  //     .then((dbFriendData) => res.json(dbFriendData))
+  //     .catch((err) => {
+  //       console.log(err);
+  //       res.status(400).json({ message: "error in your request" });
+  //     });
+  // },
 };
 
 module.exports = userController;
