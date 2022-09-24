@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, Types } = require("mongoose");
 // var validator = require("validator");
 const { default: isEmail } = require("validator/lib/isEmail");
 
@@ -42,7 +42,6 @@ const UserSchema = new Schema(
     },
   }
 );
-//friends:  Array of _id values referencing the User model (self-reference)
 
 //**virtual friendCount that retrieves the length of the user's friends array field on query.
 UserSchema.virtual("friendCount").get(function () {

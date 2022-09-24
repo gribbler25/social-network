@@ -10,9 +10,9 @@ const thoughtController = {
       });
   },
   createThought({ body }, res) {
-    Thought.create(body) //has username,
+    Thought.create(body) //has username in the body,
       .then(async ({ _id }) => {
-        //has a thought id already..
+        //has a thought id already once .create is completed..
         const dbThoughtData = await User.findOneAndUpdate(
           { username: body.username },
           { $push: { thoughts: _id } },
@@ -30,7 +30,7 @@ const thoughtController = {
   },
 
   getThought({ params }, res) {
-    Thought.findOne({ _id: params.id })
+    Thought.findOne({ _id: params.thoughtId })
       .then((dbThoughtData) => {
         if (!dbThoughtData) {
           res.status(404).json({ message: "No thought with that id!" });
@@ -41,7 +41,7 @@ const thoughtController = {
   },
 
   updateThought({ params, body }, res) {
-    Thought.findOneAndUpdate({ _id: params.id }, body, {
+    Thought.findOneAndUpdate({ _id: params.thoughtId }, body, {
       new: true,
       runValidators: true,
     })
@@ -56,7 +56,7 @@ const thoughtController = {
   },
 
   deleteThought({ params }, res) {
-    Thought.findOneAndDelete({ _id: params.id })
+    Thought.findOneAndDelete({ _id: params.thoughtId })
       .then((dbThoughtData) => {
         if (!dbThoughtData) {
           res.status(404).json({ message: "No Thought found with this id!" });
