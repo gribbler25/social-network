@@ -23,7 +23,7 @@ const userController = {
       });
   },
   deleteUser({ params }, res) {
-    User.findOneAndDelete({ _id: params.userId })
+    User.findOneAndDelete({ _id: params.id })
       .then((dbUserData) => {
         if (!dbUserData) {
           res.status(404).json({ message: "No user found with this id!" });
@@ -34,7 +34,7 @@ const userController = {
       .catch((err) => res.status(400).json(err));
   },
   getUser({ params }, res) {
-    User.findOne({ _id: params.userId })
+    User.findOne({ _id: params.id })
       .populate({
         path: "thoughts",
         select: "-__v",
@@ -54,7 +54,7 @@ const userController = {
   },
 
   updateUser({ params, body }, res) {
-    User.findOneAndUpdate({ _id: params.userId }, body, {
+    User.findOneAndUpdate({ _id: params.id }, body, {
       new: true,
       runValidators: true,
     })
@@ -68,35 +68,12 @@ const userController = {
       .catch((err) => res.status(400).json(err));
   },
 
-  addFriend({ params }, res) {
-    // for "/:userId/friends/friendId" route
-    User.findOneAndUpdate(
-      { _id: params.userId }, //get a user with the id= the param id
-      { $push: { friends: params.friendId } }, //pushes the body of the request(the friend)
-      {
-        new: true,
-        runValidators: true,
-      }
-    )
-      .then((dbFriendData) => res.json(dbFriendData))
-      .catch((err) => {
-        console.log(err);
-        res.status(400).json({ message: "error in your request" });
-      });
-  },
-
-  // deleteFriend({ params }, res) {
-  //   // for "/:userId/friends/friendId" route
-  //   User.findOneAndUpdate(
-  //     { _id: params.userId },
-  //     { $pull: { friends: params.friendId } }
-  //   )
-  //     .then((dbFriendData) => res.json(dbFriendData))
-  //     .catch((err) => {
-  //       console.log(err);
-  //       res.status(400).json({ message: "error in your request" });
-  //     });
-  // },
+  //   addFriend({}) {
+  //     User.findOneAndUpdate(); //isn't this the only way to access friends array?
+  //   },
+  //   deleteFriend({}) {
+  //     User.findOneAndUpdate(); //?
+  //   },
 };
 
 module.exports = userController;

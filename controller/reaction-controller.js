@@ -3,9 +3,10 @@ const { Thought } = require("../Model");
 //..then get a reactionID, and update the Thought model's reaction field??
 const reactionController = {
   addReaction({ params, body }, res) {
+    console.log(body, "line6");
     Thought.findOneAndUpdate(
-      { _id: params.thoughtId }, //this value is from "thoughts/:thoughtId/reactions"
-      { $push: { reactions: body } }, //this body value is what user typed in and follows rules of the ReactionSchema
+      { _id: params.id },
+      { $push: { reactions: body } },
       {
         new: true,
         runValidators: true,
@@ -20,7 +21,7 @@ const reactionController = {
 
   deleteReaction({ params }, res) {
     Thought.findOneAndDelete(
-      { _id: params.thoughtId }, //gets these values from "thoughts/:thoughtId/reactions/:reactionId" params.
+      { _id: params.thoughtId },
       { $pull: { _id: params.reactionId } }
     )
       .then((dbThoughtData) => {
