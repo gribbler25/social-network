@@ -14,8 +14,8 @@
 
 ## Project Description:
 
-This project is an API for a social network web application where users can share their thoughts, react to friends’ thoughts, and create a friend list.  
- </br>
+This project is an API built for a social network web application where users can share their thoughts, react to friends’ thoughts, and create a friend list. It is purely back end functionality.
+</br>
 
 ## Table of Contents:
 
@@ -39,8 +39,7 @@ This project is an API for a social network web application where users can shar
   </br>
 
   <h2 id="inst"> Instructions for use:</h2>
-  
-  
+  Open Insomnia or similar REST client at localhost3001 to populate the database with User and Thought data, following the routes structure provided in the routes/api directory. Then you can add Reactions and use User ID's to create friends in the Users' friends array.  Once you are satisfied with the functionality you can build a front end to use this API.
   </br>
 
   <h2 id="test"> Testing instructions:</h2>
