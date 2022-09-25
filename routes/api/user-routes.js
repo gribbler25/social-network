@@ -4,13 +4,23 @@
 //     "email": "lernantino@gmail.com"
 //   }
 
-"/api/users" TODO: GET all users
-GET a single user by its _id and populated thought and friend data
-POST a new user
-PUT to update a user by its _id
-DELETE to remove user by its _id
+const router = require("express").Router();
+const {
+  getUsers,
+  createUser,
+  getUser,
+  updateUser,
+  addFriend,
+  deleteFriend,
+  deleteUser,
+} = require("../../controller/user-controller");
 
+router.route("/").get(getUsers).post(createUser);
 
+router.route("/:userId").get(getUser).put(updateUser).delete(deleteUser);
 
-"/api/users/:userId/friends/:friendId" TODO: POST to add a new friend to a user's friend list
-DELETE to remove a friend from a user's friend list
+router.route("/:userId/friends/:friendId").post(addFriend).delete(deleteFriend);
+
+//  this is the route the module gave. but friend is not a schema..jsut push to the array?
+
+module.exports = router;
