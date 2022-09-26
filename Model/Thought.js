@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, Types, model } = require("mongoose");
 
 //Thought model sub-document schema
 const ReactionSchema = new Schema({
