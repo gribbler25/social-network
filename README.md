@@ -2,7 +2,7 @@
 
 [![License: IPL 1.0](https://img.shields.io/badge/License-IPL_1.0-blue.svg)](https://opensource.org/licenses/IPL-1.0)
 
-//put screencastify video link here
+[Screencastify Video Demo](https://watch.screencastify.com/v/7uAf9zKn1JbFbHCW8c93)
 
 ## Built with:
 
